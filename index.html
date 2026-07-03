@@ -17,11 +17,13 @@
             padding: 0;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Zmienione z center */
+            flex-direction: column;
             align-items: center;
             background-color: #f4f6f9;
             overflow-x: hidden;
             position: relative;
+            padding-top: 20px; /* Dodany odstęp od góry */
         }
 
         /* Jasne, żywe i dynamicznie kolorowe tło */
@@ -182,6 +184,27 @@
         .task-icon.pending { color: #e67e22; }
         .task-text strong { color: #111111; display: block; margin-bottom: 2px; }
         .task-text span { color: #4a5568; }
+
+        /* Style dla stopki */
+        footer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        footer a {
+            display: inline-block;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+        footer a:hover {
+            transform: scale(1.1);
+        }
+        footer img {
+            height: 30px;
+        }
     </style>
 </head>
 <body>
@@ -246,6 +269,46 @@
         </ul>
     </div>
 </div>
+
+<footer class="footer">
+    <!-- Globalne Loga -->
+    <div id="global-trusted-logos">
+        <h2 class="logo-header">Wspieramy i Polecamy</h2>
+        <div style="width: 100%;"></div> <!-- Wrapper for flexbox break -->
+        <div class="logo-tooltip" data-tooltip="Doners Kebab Łomża" onclick="openPortfolioModal('Kebab Łomża')">
+            <img src="https://ziggy83pl.github.io/zasoby/logo/doners_kebab.webp" alt="Kebab Łomża" style="--hover-color: #e67e22" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
+            <span class="logo-label">Kebab Łomża</span>
+        </div>
+        <div class="logo-tooltip" data-tooltip="Słoneczny Bojler - Darmowa Woda" onclick="openPortfolioModal('Słoneczny Bojler')">
+            <img src="https://slonecznyboiler.pages.dev/logo/slonce.webp" alt="Słoneczny Bojler" style="--hover-color: #F59E0B" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
+            <span class="logo-label">Słoneczny Bojler</span>
+        </div>
+        <div class="logo-tooltip" data-tooltip="Wspieramy Siepomaga.pl" onclick="openPortfolioModal('Pomoc')">
+            <img src="https://ziggy83pl.github.io/zasoby/logo/siepomaga.webp" alt="Pomoc" style="--hover-color: #e74c3c" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
+            <span class="logo-label">Pomoc</span>
+        </div>
+        <div class="logo-tooltip" data-tooltip="CZŁOWIEK, KTÓRY WYKONA WSZYSTKO" onclick="openPortfolioModal('Remonty')">
+            <img src="https://ziggy83pl.github.io/zasoby/logo/pawel.webp" alt="Remonty" style="--hover-color: #34495e" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
+            <span class="logo-label">Remonty</span>
+        </div>
+        <div class="logo-tooltip" data-tooltip="Enterprise - Strony WWW" onclick="openPortfolioModal('Wizytówki online')">
+            <img src="https://ziggy83pl.github.io/zasoby/logo/enterprise.webp" alt="Wizytówki online" style="--hover-color: #10b981" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
+            <span class="logo-label">Wizytówki online</span>
+        </div>
+        <div class="logo-tooltip" data-tooltip="Arkadiusz Malinowski - Uslugi Koparkarkowe" onclick="openPortfolioModal('Koparka')">
+            <img src="https://ziggy83pl.github.io/zasoby/logo/arkop.webp" alt="Koparka" style="--hover-color: #f59e0b" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
+            <span class="logo-label">Koparka</span>
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <p>© 2024 LZ-TECH Usługi Minikoparką i Elektryczne <span class="footer-separator">|</span> <a href="polityka-prywatnosci.html" style="text-decoration: underline;">Polityka Prywatności</a></p>
+        <p>Realizacja: <a href="https://wizytowka-online.pages.dev/" target="_blank">Enterprise</a></p>
+    </div>
+    <button id="install-btn" class="btn-install" style="display: none;"><i class="fas fa-download"></i> Zainstaluj Aplikację</button>
+</footer>
+<script src="https://ziggy83pl.github.io/zasoby/portfolio-logos.js" defer=""></script>
+<script src="https://ziggy83pl.github.io/zasoby/magnifier.js" defer=""></script>
 
 </body>
 </html>
