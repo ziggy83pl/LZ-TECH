@@ -147,7 +147,7 @@
             height: 100%;
         }
         .circle-bg { fill: none; stroke: #e0e0e0; stroke-width: 3; }
-        .circle { fill: none; stroke: #f1c40f; stroke-width: 3; stroke-dasharray: 15, 100; }
+        .circle { fill: none; stroke: #f1c40f; stroke-width: 3; stroke-dasharray: 30, 100; }
         .chart-text {
             position: absolute;
             top: 50%; left: 50%;
@@ -165,9 +165,9 @@
             margin-bottom: 35px;
             border: 1px solid #e2e8f0;
         }
-        .budget-row { display: flex; justify-content: space-between; margin: 6px 0; font-size: 14px; color: #4a5568; }
+        .budget-row { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; font-size: 14px; color: #4a5568; }
         .budget-row.total {
-            border-top: 1px solid #cbd5e1; padding-top: 12px; margin-top: 12px;
+            border-top: 1px solid #cbd5e1; padding-top: 12px; margin-top: 12px; 
             font-weight: bold; color: #e67e22; font-size: 16px;
         }
 
@@ -221,18 +221,18 @@
     <div class="chart-container">
         <svg viewBox="0 0 36 36" class="circular-chart">
             <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path class="circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
         </svg>
         <div class="chart-text">
-            <div class="percentage">15%</div>
+            <div class="percentage">30%</div>
             <div class="percentage-label">Alokacji<br>Budżetu</div>
         </div>
     </div>
 
     <div class="budget-info">
         <div class="budget-row"><span>Całkowity budżet projektowy:</span><span>2 800,00 zł</span></div>
-        <div class="budget-row"><span>Bieżące zaangażowanie środków (15%):</span><span>420,00 zł</span></div>
-        <div class="budget-row total"><span>Dostępne rezerwy budżetowe:</span><span>2 380,00 zł</span></div>
+        <div class="budget-row"><span>Bieżące zaangażowanie środków (30%):</span><span>840,00 zł</span></div>
+        <div class="budget-row total"><span>Dostępne rezerwy budżetowe:</span><span>1 960,00 zł</span></div>
     </div>
 
     <div class="tasks-section">
@@ -266,43 +266,40 @@
                     <span>Przygotowanie kodu pod pozycjonowanie lokalne dla fraz "usługi minikoparką" oraz "usługi elektryczne". Konfiguracja bezpośrednich odnośników do profili społecznościowych Facebook oraz TikTok widocznych na wizytówce.</span>
                 </div>
             </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Galeria realizacji i referencje:</strong>
+                    <span>Stworzenie dedykowanej sekcji prezentującej portfolio zrealizowanych prac (zdjęcia/wideo). Zbuduje to zaufanie i wiarygodność marki, pokazując jakość i zakres usług.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Formularz kontaktowy i mapa dojazdu:</strong>
+                    <span>Implementacja prostego formularza zapytań ofertowych oraz interaktywnej mapy Google z lokalizacją firmy, co ułatwi klientom kontakt i dotarcie na miejsce.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Testy końcowe i optymalizacja wydajności:</strong>
+                    <span>Przeprowadzenie kompleksowych testów na różnych urządzeniach i przeglądarkach. Optymalizacja szybkości ładowania strony (PageSpeed) w celu zapewnienia najlepszego doświadczenia użytkownika.</span>
+                </div>
+            </li>
         </ul>
     </div>
 </div>
 
 <footer class="footer">
     <!-- Globalne Loga -->
-    <div id="global-trusted-logos">
-        <h2 class="logo-header">Wspieramy i Polecamy</h2>
-        <div style="width: 100%;"></div> <!-- Wrapper for flexbox break -->
-        <div class="logo-tooltip" data-tooltip="Doners Kebab Łomża" onclick="openPortfolioModal('Kebab Łomża')">
-            <img src="https://ziggy83pl.github.io/zasoby/logo/doners_kebab.webp" alt="Kebab Łomża" style="--hover-color: #e67e22" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
-            <span class="logo-label">Kebab Łomża</span>
-        </div>
-        <div class="logo-tooltip" data-tooltip="Słoneczny Bojler - Darmowa Woda" onclick="openPortfolioModal('Słoneczny Bojler')">
-            <img src="https://slonecznyboiler.pages.dev/logo/slonce.webp" alt="Słoneczny Bojler" style="--hover-color: #F59E0B" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
-            <span class="logo-label">Słoneczny Bojler</span>
-        </div>
-        <div class="logo-tooltip" data-tooltip="Wspieramy Siepomaga.pl" onclick="openPortfolioModal('Pomoc')">
-            <img src="https://ziggy83pl.github.io/zasoby/logo/siepomaga.webp" alt="Pomoc" style="--hover-color: #e74c3c" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
-            <span class="logo-label">Pomoc</span>
-        </div>
-        <div class="logo-tooltip" data-tooltip="CZŁOWIEK, KTÓRY WYKONA WSZYSTKO" onclick="openPortfolioModal('Remonty')">
-            <img src="https://ziggy83pl.github.io/zasoby/logo/pawel.webp" alt="Remonty" style="--hover-color: #34495e" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
-            <span class="logo-label">Remonty</span>
-        </div>
-        <div class="logo-tooltip" data-tooltip="Enterprise - Strony WWW" onclick="openPortfolioModal('Wizytówki online')">
-            <img src="https://ziggy83pl.github.io/zasoby/logo/enterprise.webp" alt="Wizytówki online" style="--hover-color: #10b981" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
-            <span class="logo-label">Wizytówki online</span>
-        </div>
-        <div class="logo-tooltip" data-tooltip="Arkadiusz Malinowski - Uslugi Koparkarkowe" onclick="openPortfolioModal('Koparka')">
-            <img src="https://ziggy83pl.github.io/zasoby/logo/arkop.webp" alt="Koparka" style="--hover-color: #f59e0b" width="70" height="70" loading="lazy" onerror="this.style.display='none'">
-            <span class="logo-label">Koparka</span>
-        </div>
-    </div>
+   <div class="container">
+            <!-- Globalne Loga -->
+            <div id="global-trusted-logos" style="margin-bottom: 30px;"></div>
+   </div>
 
     <div class="footer-info">
-        <p>© 2024 LZ-TECH Usługi Minikoparką i Elektryczne <span class="footer-separator">|</span> <a href="polityka-prywatnosci.html" style="text-decoration: underline;">Polityka Prywatności</a></p>
+        <p>© 2026 LZ-TECH Usługi Minikoparką i Elektryczne <span class="footer-separator">|</span> <a href="polityka-prywatnosci.html" style="text-decoration: underline;">Polityka Prywatności</a></p>
         <p>Realizacja: <a href="https://wizytowka-online.pages.dev/" target="_blank">Enterprise</a></p>
     </div>
     <button id="install-btn" class="btn-install" style="display: none;"><i class="fas fa-download"></i> Zainstaluj Aplikację</button>
