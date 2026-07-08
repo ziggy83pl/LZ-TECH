@@ -1331,3 +1331,47 @@ button.social-link {
     background-color: rgba(255, 204, 0, 0.05);
     transform: translateY(-2px);
 }
+
+/* -- 11. Wizytówki Marquee -- */
+#global-trusted-logos {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 15px !important;
+}
+
+.logos-marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
+}
+
+.logos-track {
+    display: flex;
+    width: max-content;
+    gap: 0 !important;
+    animation: scrollMarquee 25s linear infinite;
+}
+
+.logos-track:hover {
+    animation-play-state: paused;
+}
+
+.logos-track .logo-tooltip {
+    margin: 0 15px !important;
+}
+
+@keyframes scrollMarquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}

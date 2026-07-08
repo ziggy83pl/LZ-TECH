@@ -289,4 +289,47 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactShareBtn) {
         contactShareBtn.addEventListener('click', performShare);
     }
+
+    // --- 8. Przekształcenie logotypów w przewijany pasek (marquee/slider) ---
+    const initLogosMarquee = () => {
+        const container = document.getElementById('global-trusted-logos');
+        if (!container) return;
+
+        // portfolio-logos.js wstrzykuje loga asynchronicznie.
+        // Jeśli loga jeszcze się nie wygenerowały, ponawiamy próbę za chwilę.
+        const logoElements = container.querySelectorAll('.logo-tooltip');
+        if (logoElements.length === 0) {
+            setTimeout(initLogosMarquee, 100);
+            return;
+        }
+
+        // Sprawdzamy czy już nie utworzyliśmy karuzeli
+        if (container.querySelector('.logos-marquee')) return;
+
+        const marqueeDiv = document.createElement('div');
+        marqueeDiv.className = 'logos-marquee';
+
+        const trackDiv = document.createElement('div');
+        trackDiv.className = 'logos-track';
+
+        // Klonujemy logotypy dwukrotnie, aby uzyskać płynne, zapętlone przewijanie
+        logoElements.forEach(el => trackDiv.appendChild(el.cloneNode(true)));
+        logoElements.forEach(el => trackDiv.appendChild(el.cloneNode(true)));
+
+        marqueeDiv.appendChild(trackDiv);
+
+        // Usuwamy stare logotypy z głównego kontenera, zachowując nagłówek
+        const header = container.querySelector('.logo-header');
+        container.innerHTML = '';
+        if (header) {
+            container.appendChild(header);
+        }
+        container.appendChild(marqueeDiv);
+    };
+
+    if (document.readyState === 'complete') {
+        initLogosMarquee();
+    } else {
+        window.addEventListener('load', initLogosMarquee);
+    }
 });
