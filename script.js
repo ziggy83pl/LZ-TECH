@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wysyłanie...';
             
             if (contactForm.action.includes('YOUR_FORM_ID_HERE')) {
-                alert('Formularz nie jest jeszcze w pełni skonfigurowany. Musisz najpierw założyć darmowe konto na Formspree.io, utworzyć formularz przypisany do adresu ulukaszek81@yahoo.pl i wstawić otrzymany identyfikator Form ID w miejsce "YOUR_FORM_ID_HERE" w pliku index.html.');
+                alert('Formularz nie jest jeszcze w pełni skonfigurowany. Musisz najpierw założyć darmowe konto na Formspree.io, utworzyć formularz przypisany do adresu lz.tech.lomza@gmail.com i wstawić otrzymany identyfikator Form ID w miejsce "YOUR_FORM_ID_HERE" w pliku index.html.');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
                 return;
@@ -208,9 +208,85 @@ document.addEventListener('DOMContentLoaded', () => {
     if (emailLink) {
         emailLink.addEventListener('click', (e) => {
             e.preventDefault();
-            const user = 'ulukaszek81';
-            const domain = 'yahoo.pl';
+            const user = 'lz.tech.lomza';
+            const domain = 'gmail.com';
             window.location.href = `mailto:${user}@${domain}`;
         });
+    }
+
+    // --- 7. Obsługa Udostępniania (Web Share API) ---
+    const heroShareBtn = document.getElementById('heroShareBtn');
+    const contactShareBtn = document.getElementById('contactShareBtn');
+    
+    const shareData = {
+        title: 'LZ-TECH | Usługi Minikoparką i Elektryczne',
+        text: 'Profesjonalne usługi ziemne minikoparką oraz instalacje elektryczne. Łukasz Żochowski, Łomża i okolice.',
+        url: 'https://lz-tech.pages.dev/'
+    };
+
+    const showToast = (message) => {
+        let toast = document.getElementById('share-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'share-toast';
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+                background-color: var(--color-bg-dark);
+                color: var(--color-primary);
+                border: 2px solid var(--color-primary);
+                padding: 12px 24px;
+                border-radius: var(--border-radius-sm);
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                z-index: 10000;
+                opacity: 0;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                pointer-events: none;
+                font-size: 14px;
+                text-align: center;
+                white-space: nowrap;
+            `;
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        // Animate in
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        }, 50);
+        // Animate out
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+        }, 3000);
+    };
+
+    const performShare = async (e) => {
+        e.preventDefault();
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log('Udostępnianie anulowane lub nieudane:', err);
+            }
+        } else {
+            // Kopiowanie do schowka na komputerach stacjonarnych
+            try {
+                await navigator.clipboard.writeText(shareData.url);
+                showToast('Link do strony został skopiowany do schowka!');
+            } catch (err) {
+                alert('Skopiuj ten link, aby udostępnić stronę: ' + shareData.url);
+            }
+        }
+    };
+
+    if (heroShareBtn) {
+        heroShareBtn.addEventListener('click', performShare);
+    }
+    if (contactShareBtn) {
+        contactShareBtn.addEventListener('click', performShare);
     }
 });
