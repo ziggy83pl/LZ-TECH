@@ -1203,10 +1203,10 @@
                 </div>
                 <div class="hero-socials">
                     <span>Odwiedź nas:</span>
-                    <a href="https://www.facebook.com/twojprofil" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=100002462607617&locale=pl_PL" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@twojprofil" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+                    <a href="https://www.tiktok.com/@badnewsakasz?_r=1&_t=ZN-97qMqDeiDck" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
@@ -1300,7 +1300,7 @@
             <div class="container banner-content">
                 <div class="banner-text reveal">
                     <h3>Podejmijmy stałą <span>współpracę</span></h3>
-                    <p>Oferujemy elastyczne warunki współpracy dla deweloperów, firm budowlanych oraz klientów indywidualnych przy większych inwestycjach na terenie województwa Podlaskiego.</p>
+                    <p>Oferujemy elastyczne warunki współpracy dla deweloperów, firm budowlanych oraz klientów indywidualnych przy większych inwestycjach na terenie województwa lubelskiego.</p>
                 </div>
                 <div class="banner-btn reveal">
                     <a href="tel:534999054" class="btn btn-primary">
@@ -1455,26 +1455,26 @@
                         <h3>Wyślij zapytanie o wycenę</h3>
                         
                         <!-- Formularz właściwy -->
-                        <form class="contact-form" id="contactForm" novalidate>
+                        <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST" novalidate>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="formName">Imię i nazwisko *</label>
-                                    <input type="text" id="formName" class="form-control" placeholder="np. Jan Kowalski" required>
+                                    <input type="text" name="name" id="formName" class="form-control" placeholder="np. Jan Kowalski" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="formPhone">Numer telefonu *</label>
-                                    <input type="tel" id="formPhone" class="form-control" placeholder="np. 500 600 700" required>
+                                    <input type="tel" name="phone" id="formPhone" class="form-control" placeholder="np. 500 600 700" required>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="formEmail">Adres e-mail *</label>
-                                <input type="email" id="formEmail" class="form-control" placeholder="np. jan.kowalski@email.pl" required>
+                                <input type="email" name="email" id="formEmail" class="form-control" placeholder="np. jan.kowalski@email.pl" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="formService">Interesuje mnie *</label>
-                                <select id="formService" class="form-control" required>
+                                <select name="service" id="formService" class="form-control" required>
                                     <option value="" disabled selected>Wybierz rodzaj usługi...</option>
                                     <option value="minikoparka">Prace ziemne / Minikoparka</option>
                                     <option value="elektryka">Instalacje elektryczne</option>
@@ -1482,14 +1482,19 @@
                                     <option value="inne">Inny temat</option>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="formLocation">Lokalizacja inwestycji (miejscowość) *</label>
+                                <input type="text" name="lokalizacja" id="formLocation" class="form-control" placeholder="np. Łomża, Zambrów, Stawiski" required>
+                            </div>
                             
                             <div class="form-group">
                                 <label for="formMessage">Opisz zakres prac *</label>
-                                <textarea id="formMessage" class="form-control" placeholder="Opisz krótko planowane prace, ich lokalizację oraz termin realizacji..." required></textarea>
+                                <textarea name="message" id="formMessage" class="form-control" placeholder="Opisz krótko planowane prace, ich lokalizację oraz termin realizacji..." required></textarea>
                             </div>
                             
                             <div class="form-group checkbox-group">
-                                <input type="checkbox" id="formPrivacy" required>
+                                <input type="checkbox" name="privacy" id="formPrivacy" required>
                                 <label for="formPrivacy">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu kontaktu handlowego zgodnie z <a href="polityka-prywatnosci.html" target="_blank">polityką prywatności</a>. *</label>
                             </div>
                             
@@ -1654,13 +1659,14 @@
                     const phone = document.getElementById('formPhone');
                     const email = document.getElementById('formEmail');
                     const service = document.getElementById('formService');
+                    const location = document.getElementById('formLocation');
                     const message = document.getElementById('formMessage');
                     const privacy = document.getElementById('formPrivacy');
                     
                     let isValid = true;
                     
                     // Prosta wizualna walidacja (dodanie czerwonej ramki)
-                    [name, phone, email, service, message, privacy].forEach(el => {
+                    [name, phone, email, service, location, message, privacy].forEach(el => {
                         if (!el.checkValidity()) {
                             el.style.borderColor = '#e74c3c';
                             isValid = false;
@@ -1670,7 +1676,7 @@
                     });
 
                     // Dodatkowy nasłuch na zmianę wartości w celu resetu koloru obramowania
-                    [name, phone, email, service, message, privacy].forEach(el => {
+                    [name, phone, email, service, location, message, privacy].forEach(el => {
                         el.addEventListener('input', () => {
                             if (el.checkValidity()) {
                                 el.style.borderColor = 'var(--color-border)';
@@ -1682,24 +1688,55 @@
                         return;
                     }
 
-                    // Symulacja wysyłania wiadomości (efekt ładowania przycisku)
+                    // Wysyłanie wiadomości przez Formspree
                     const submitBtn = contactForm.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wysyłanie...';
                     
-                    setTimeout(() => {
-                        contactForm.reset();
+                    if (contactForm.action.includes('YOUR_FORM_ID_HERE')) {
+                        alert('Formularz nie jest jeszcze w pełni skonfigurowany. Musisz najpierw założyć darmowe konto na Formspree.io, utworzyć formularz przypisany do adresu ulukaszek81@yahoo.pl i wstawić otrzymany identyfikator Form ID w miejsce "YOUR_FORM_ID_HERE" w pliku index.html.');
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalText;
-                        
-                        // Ukrycie formularza i pokazanie podziękowania
-                        contactForm.style.display = 'none';
-                        formSuccess.style.display = 'block';
-                        
-                        // Przewiń płynnie na początek sekcji formularza
-                        document.getElementById('kontakt-form').scrollIntoView({ behavior: 'smooth' });
-                    }, 1200);
+                        return;
+                    }
+
+                    const formData = new FormData(contactForm);
+                    
+                    fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            contactForm.reset();
+                            // Ukrycie formularza i pokazanie podziękowania
+                            contactForm.style.display = 'none';
+                            formSuccess.style.display = 'block';
+                            
+                            // Przewiń płynnie na początek sekcji formularza
+                            document.getElementById('kontakt-form').scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                            return response.json().then(data => {
+                                if (data && data.errors) {
+                                    throw new Error(data.errors.map(err => err.message).join(', '));
+                                } else {
+                                    throw new Error('Wystąpił błąd podczas wysyłania wiadomości.');
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Błąd Formspree:', error);
+                        alert('Nie udało się wysłać wiadomości: ' + error.message);
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    });
                 });
             }
 
