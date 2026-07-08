@@ -416,45 +416,48 @@
                         
                         <!-- Formularz właściwy -->
                         <form class="contact-form" id="contactForm" action="https://formspree.io/f/mlgykkwo" method="POST" novalidate>
+                            <!-- Konfiguracja tematu wiadomości Formspree -->
+                            <input type="hidden" name="_subject" value="Nowe zapytanie od klienta - LZ-TECH">
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="formName">Imię i nazwisko *</label>
-                                    <input type="text" name="name" id="formName" class="form-control" placeholder="np. Jan Kowalski" required>
+                                    <input type="text" name="Imię i nazwisko" id="formName" class="form-control" placeholder="np. Jan Kowalski" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="formPhone">Numer telefonu *</label>
-                                    <input type="tel" name="phone" id="formPhone" class="form-control" placeholder="np. 500 600 700" required>
+                                    <input type="tel" name="Numer telefonu" id="formPhone" class="form-control" placeholder="np. 500 600 700" required>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="formEmail">Adres e-mail *</label>
-                                <input type="email" name="email" id="formEmail" class="form-control" placeholder="np. jan.kowalski@email.pl" required>
+                                <input type="email" name="Adres e-mail" id="formEmail" class="form-control" placeholder="np. jan.kowalski@email.pl" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="formService">Interesuje mnie *</label>
-                                <select name="service" id="formService" class="form-control" required>
+                                <select name="Rodzaj usługi" id="formService" class="form-control" required>
                                     <option value="" disabled selected>Wybierz rodzaj usługi...</option>
-                                    <option value="minikoparka">Prace ziemne / Minikoparka</option>
-                                    <option value="elektryka">Instalacje elektryczne</option>
-                                    <option value="kompleksowo">Usługa kompleksowa (koparka + elektryka)</option>
-                                    <option value="inne">Inny temat</option>
+                                    <option value="Prace ziemne / Minikoparka">Prace ziemne / Minikoparka</option>
+                                    <option value="Instalacje elektryczne">Instalacje elektryczne</option>
+                                    <option value="Usługa kompleksowa (koparka + elektryka)">Usługa kompleksowa (koparka + elektryka)</option>
+                                    <option value="Inny temat">Inny temat</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="formLocation">Lokalizacja inwestycji (miejscowość) *</label>
-                                <input type="text" name="lokalizacja" id="formLocation" class="form-control" placeholder="np. Łomża, Zambrów, Stawiski" required>
+                                <input type="text" name="Lokalizacja inwestycji" id="formLocation" class="form-control" placeholder="np. Łomża, Zambrów, Stawiski" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="formMessage">Opisz zakres prac *</label>
-                                <textarea name="message" id="formMessage" class="form-control" placeholder="Opisz krótko planowane prace, ich lokalizację oraz termin realizacji..." required></textarea>
+                                <textarea name="Treść zapytania" id="formMessage" class="form-control" placeholder="Opisz krótko planowane prace, ich lokalizację oraz termin realizacji..." required></textarea>
                             </div>
                             
                             <div class="form-group checkbox-group">
-                                <input type="checkbox" name="privacy" id="formPrivacy" required>
+                                <input type="checkbox" name="Zgoda RODO" id="formPrivacy" required>
                                 <label for="formPrivacy">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu kontaktu handlowego zgodnie z <a href="polityka-prywatnosci.html" target="_blank">polityką prywatności</a>. *</label>
                             </div>
                             
