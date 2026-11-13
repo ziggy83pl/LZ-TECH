@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona w produkcji - LZ-TECH Usługi Minikoparką i Elektryczne</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: flex-start; /* Zmienione z center */
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f6f9;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 20px; /* Dodany odstęp od góry */
+        }
+
+        /* Jasne, żywe i dynamicznie kolorowe tło */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(
+                125deg, 
+                #ffecb3 0%, 
+                #ffe082 25%, 
+                #ffb74d 50%, 
+                #ff8a65 75%, 
+                #b2dfdb 100%
+            );
+            background-size: 300% 300%;
+            animation: vibrantMovement 10s ease-in-out infinite alternate;
+        }
+
+        /* Warstwa pulsującego światła potęgująca efekt "żywego" tła */
+        .animated-bg::after {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
+            animation: pulseLight 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes vibrantMovement {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseLight {
+            0% { transform: scale(0.9) translate(-5%, -5%); }
+            100% { transform: scale(1.1) translate(5%, 5%); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.96);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            padding: 40px;
+            max-width: 650px;
+            width: 100%;
+            margin: 20px;
+            text-align: center;
+            border-left: 6px solid #f1c40f; 
+            border-right: 6px solid #e74c3c; 
+        }
+
+        .logo-box {
+            background-color: #f1c40f;
+            color: #000000;
+            display: inline-block;
+            padding: 8px 25px;
+            font-weight: 900;
+            font-size: 36px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            border-radius: 4px;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #ffffff;
+            background-color: #111111;
+            display: inline-block;
+            padding: 6px 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .phone-badge {
+            font-size: 22px;
+            font-weight: bold;
+            color: #222222;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        .phone-badge span {
+            background: #111111;
+            padding: 2px 10px;
+            border-radius: 4px;
+            color: #f1c40f;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: #ffffff;
+            padding: 6px 18px;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Wykres kołowy */
+        .chart-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 35px;
+        }
+        .circular-chart {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .circle-bg { fill: none; stroke: #e0e0e0; stroke-width: 3; }
+        .circle { fill: none; stroke: #f1c40f; stroke-width: 3; stroke-dasharray: 30, 100; }
+        .chart-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .percentage { font-size: 34px; font-weight: 800; color: #111111; }
+        .percentage-label { font-size: 11px; color: #666666; text-transform: uppercase; }
+
+        /* Finanse */
+        .budget-info {
+            background-color: #f8f9fa;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            border: 1px solid #e2e8f0;
+        }
+        .budget-row { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; font-size: 14px; color: #4a5568; }
+        .budget-row.total {
+            border-top: 1px solid #cbd5e1; padding-top: 12px; margin-top: 12px; 
+            font-weight: bold; color: #e67e22; font-size: 16px;
+        }
+
+        /* Lista zadań */
+        .tasks-section { text-align: left; border-top: 1px solid #e2e8f0; padding-top: 25px; }
+        .tasks-section h2 {
+            font-size: 16px; margin-bottom: 20px; color: #111111; text-transform: uppercase;
+            letter-spacing: 1px; border-bottom: 2px solid #f1c40f; display: inline-block; padding-bottom: 3px;
+        }
+        .task-list { list-style: none; }
+        .task-item { display: flex; align-items: flex-start; margin-bottom: 16px; font-size: 14px; line-height: 1.5; }
+        .task-icon { margin-right: 12px; font-size: 15px; margin-top: 2px; }
+        .task-icon.done { color: #2ecc71; }
+        .task-icon.pending { color: #e67e22; }
+        .task-text strong { color: #111111; display: block; margin-bottom: 2px; }
+        .task-text span { color: #4a5568; }
+
+        /* Style dla stopki */
+        footer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        footer a {
+            display: inline-block;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+        footer a:hover {
+            transform: scale(1.1);
+        }
+        footer img {
+            height: 30px;
+        }
+    </style>
+<style id="mg-style">
+.mg-strip{background:#0f1f3d;padding:22px 16px;text-align:center}
+.mg-badge{display:inline-flex;align-items:center;gap:14px;padding:10px 20px 10px 10px;background:#fff;border:2px solid #f5c400;border-radius:14px;color:#0f1f3d;text-decoration:none;font-family:inherit;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s;max-width:100%}
+.mg-badge:hover,.mg-badge:focus-visible{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.mg-badge img{width:56px;height:56px;border-radius:10px;flex-shrink:0}
+.mg-badge span{display:flex;flex-direction:column;text-align:left;line-height:1.25}
+.mg-badge small{font-size:.8rem;opacity:.75;text-transform:uppercase;letter-spacing:.06em}
+.mg-badge strong{font-size:1.1rem}
+.mg-pill{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:5px 14px 5px 5px;background:rgba(255,255,255,.95);border:1px solid #f5c400;border-radius:999px;color:#0f1f3d;font-size:.9rem;font-weight:600;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:transform .2s}
+.mg-pill:hover,.mg-pill:focus-visible{transform:translateY(-1px)}
+.mg-pill img{width:28px;height:28px;border-radius:50%}
+</style>
+</head>
+<body>
+
+<div class="animated-bg"></div>
+
+<div class="container">
+    <div class="logo-box">LZ-TECH</div>
+    <h1>Usługi Minikoparką i Elektryczne</h1>
+    <div class="phone-badge">TEL. <span>534 999 054</span></div>
+    
+    <div><span class="status-badge">Prace inżynieryjne w toku</span></div>
+    
+    <div class="chart-container">
+        <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+        </svg>
+        <div class="chart-text">
+            <div class="percentage">30%</div>
+            <div class="percentage-label">Alokacji<br>Budżetu</div>
+        </div>
+    </div>
+
+    <div class="budget-info">
+        <div class="budget-row"><span>Całkowity budżet projektowy:</span><span>2 800,00 zł</span></div>
+        <div class="budget-row"><span>Bieżące zaangażowanie środków (30%):</span><span>840,00 zł</span></div>
+        <div class="budget-row total"><span>Dostępne rezerwy budżetowe:</span><span>1 960,00 zł</span></div>
+    </div>
+
+    <div class="tasks-section">
+        <h2>Kamienie milowe i specyfikacja wdrożenia:</h2>
+        <ul class="task-list">
+            <li class="task-item">
+                <span class="task-icon done">✔</span>
+                <div class="task-text">
+                    <strong>Projektowanie struktury (Layout UX/UI):</strong>
+                    <span>Opracowanie szkieletu funkcjonalnego i nawigacji witryny. Przystosowanie architektury informacji pod szybki kontakt i konwersję telefoniczną dla klientów poszukujących usług sprzętowych i elektroinstalacyjnych.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon done">✔</span>
+                <div class="task-text">
+                    <strong>Identyfikacja wizualna i branding:</strong>
+                    <span>Zaimplementowanie palety barw bezpośrednio z fizycznej wizytówki firmy (głęboka czerń, żółty ostrzegawczy oraz akcenty maszynowe). Zapewnia to spójność marki LZ-TECH w kanałach offline oraz online.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Silnik obsługi witryny (Logika JavaScript):</strong>
+                    <span>Kodowanie mechanizmów interaktywnych oraz optymalizacja skryptów odpowiedzialnych za płynność działania witryny. Wdrożenie asynchronicznych rozwiązań przyspieszających ładowanie na urządzeniach mobilnych (smartfonach).</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Optymalizacja SEO i integracja Social Media:</strong>
+                    <span>Przygotowanie kodu pod pozycjonowanie lokalne dla fraz "usługi minikoparką" oraz "usługi elektryczne". Konfiguracja bezpośrednich odnośników do profili społecznościowych Facebook oraz TikTok widocznych na wizytówce.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Galeria realizacji i referencje:</strong>
+                    <span>Stworzenie dedykowanej sekcji prezentującej portfolio zrealizowanych prac (zdjęcia/wideo). Zbuduje to zaufanie i wiarygodność marki, pokazując jakość i zakres usług.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Formularz kontaktowy i mapa dojazdu:</strong>
+                    <span>Implementacja prostego formularza zapytań ofertowych oraz interaktywnej mapy Google z lokalizacją firmy, co ułatwi klientom kontakt i dotarcie na miejsce.</span>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-icon pending">⏳</span>
+                <div class="task-text">
+                    <strong>Testy końcowe i optymalizacja wydajności:</strong>
+                    <span>Przeprowadzenie kompleksowych testów na różnych urządzeniach i przeglądarkach. Optymalizacja szybkości ładowania strony (PageSpeed) w celu zapewnienia najlepszego doświadczenia użytkownika.</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- MajsterGielda -->
+<div class="mg-strip"><a class="mg-badge" href="https://majstergielda.pl/" target="_blank" rel="noopener" title="MajsterGiełda.pl"><img src="majstergielda.png" alt="Logo MajsterGiełda.pl" width="56" height="56" loading="lazy"><span><small>Polecany przez</small><strong>MajsterGiełda.pl</strong></span></a></div>
+<footer class="footer">
+    <!-- Globalne Loga -->
+   <div class="container">
+            <!-- Globalne Loga -->
+            <div id="global-trusted-logos" style="margin-bottom: 30px;"></div>
+   </div>
+
+    <div class="footer-info">
+        <p>© 2026 LZ-TECH Usługi Minikoparką i Elektryczne <span class="footer-separator">|</span> <a href="polityka-prywatnosci.html" style="text-decoration: underline;">Polityka Prywatności</a></p>
+        <p>Realizacja: <a href="https://wizytowka-online.pages.dev/" target="_blank">Enterprise</a></p>
+    </div>
+    <button id="install-btn" class="btn-install" style="display: none;"><i class="fas fa-download"></i> Zainstaluj Aplikację</button>
+</footer>
+<script src="https://ziggy83pl.github.io/zasoby/portfolio-logos.js" defer=""></script>
+<script src="https://ziggy83pl.github.io/zasoby/magnifier.js" defer=""></script>
+
+</body>
+</html>
